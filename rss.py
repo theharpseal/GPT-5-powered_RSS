@@ -4,7 +4,6 @@ import requests
 import feedparser
 from openai import OpenAI
 
-# Environment variables (set these as GitHub Secrets)
 WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
@@ -13,11 +12,9 @@ if not WEBHOOK_URL or not OPENAI_API_KEY:
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-# Add/modify feeds here
 FEEDS = [
     "https://arxiv.org/rss/cs.RO",       # Robotics
-    "https://arxiv.org/rss/eess.SP",     # Signal processing / some hardware-ish
-    # Add more RSS links as you like
+    "https://arxiv.org/rss/eess.SP",     # Example second feed
 ]
 
 STATE_FILE = "seen.json"
@@ -37,10 +34,6 @@ def save_seen(seen):
 
 
 def summarize(text: str) -> str:
-    """
-    Use GPT-5.1 mini to produce a short, high-signal summary.
-    """
-    # Trim mega-long descriptions just in case
     text = text[:6000]
 
     prompt = (
@@ -54,7 +47,7 @@ def summarize(text: str) -> str:
     )
 
     response = client.chat.completions.create(
-        model="gpt-5.1-mini",  # cheaper & fast, still very smart
+        model="gpt-5.1-mini",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=220,
         temperature=0.2,
@@ -81,7 +74,6 @@ def main():
             if not uid:
                 continue
 
-            # Skip if we've already seen this
             if uid in seen:
                 continue
 
@@ -103,3 +95,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
