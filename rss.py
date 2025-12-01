@@ -92,6 +92,7 @@ def main():
 
     save_seen(seen)
 
+post_to_discord("TEST MESSAGE", "https://example.com", "This is a test.")
 
 if __name__ == "__main__":
     main()
