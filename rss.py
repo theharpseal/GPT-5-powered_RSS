@@ -14,7 +14,10 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 FEEDS = [
     "https://arxiv.org/rss/cs.RO",       # Robotics
-    "https://arxiv.org/rss/eess.SP",     # Example second feed
+    "https://arxiv.org/rss/cs.AI",       # AI
+    "https://arxiv.org/rss/eess.SP",     # Signal processing
+    "https://semiengineering.com/feed/", # Semiconductors blog example
+    # add more here
 ]
 
 STATE_FILE = "seen.json"
