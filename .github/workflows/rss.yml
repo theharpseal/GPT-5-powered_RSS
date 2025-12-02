@@ -2,7 +2,7 @@ name: RSS Summaries with GPT-5.1 mini
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # every 30 min
+    - cron: "*/15 * * * *"  # every 15 min
   workflow_dispatch:        # allow manual run
 
 jobs:
